@@ -1,7 +1,7 @@
 // Conjunto de dados por tipo de filtro selecionado
 const dadosPorFiltro = {
   todos: {
-    pizza: [44.4%, 37%, 11.1%, 7.4%], // Redes Sociais, Portais, TV, Outros
+    pizza: [44%, 37%, 11%, 10%], // Redes Sociais, Portais, TV, Outros
     barras: [18, 12]          // Acreditaram/Compartilharam, Ficaram na dúvida/Pesquisaram
   },
   portais: {
