@@ -8,7 +8,7 @@ const dadosPesquisa = {
       'Jogos/E-mails/Notícias', 
       'Redes Sociais (TikTok/Insta)'
     ],
-    valores: [12, 10, 3, 2] // 12 (44.4%), 10 (37%), 3 (11.1%), 2 (7.4%)
+    valores: [44.4, 37, 11.1, 7.4] // 44,4% (44.4%), 37% (37%), 11,1% (11.1%), 7,4% (7.4%)
   },
   
   // Gráfico 2: Reação ao telemóvel tocar na aula
