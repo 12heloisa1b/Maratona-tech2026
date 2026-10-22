@@ -1,27 +1,35 @@
-// Conjunto de dados por tipo de filtro selecionado
-const dadosPorFiltro = {
-  todos: {
-    pizza: [44%, 37%, 11%, 10%], // Redes Sociais, Portais, TV, Outros
-    barras: [18, 12]          // Acreditaram/Compartilharam, Ficaram na dúvida/Pesquisaram
+// Dados REAIS extraídos da sua pesquisa (27 alunos)
+const dadosPesquisa = {
+  // Gráfico 1: Notificações que mais tiram a atenção
+  notificacoes: {
+    labels: [
+      'Mensagens/Grupos (WhatsApp)', 
+      'Nenhuma (Ignora todas)', 
+      'Jogos/E-mails/Notícias', 
+      'Redes Sociais (TikTok/Insta)'
+    ],
+    valores: [12, 10, 3, 2] // 12 (44.4%), 10 (37%), 3 (11.1%), 2 (7.4%)
   },
-  portais: {
-    pizza: [0, 100, 0, 0],
-    barras: [2, 28]           // Maioria pesquisou e checou a farsa
-  },
-  redes: {
-    pizza: [100, 0, 0, 0],
-    barras: [25, 5]           // Maioria acreditou de cara
+  
+  // Gráfico 2: Reação ao telemóvel tocar na aula
+  reacaoAula: {
+    labels: [
+      'Olham imediatamente', 
+      'Esperam pausa do professor', 
+      'Ignoram até ao final'
+    ],
+    valores: [14, 7, 6] // 14 (51.9%), 7 (25.9%), 6 (22.2%)
   }
 };
 
-// Configuração do Gráfico 1 (Pizza)
+// Configuração do Gráfico 1 (Pizza - Tipos de Notificação)
 const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
 const graficoPizza = new Chart(ctxPizza, {
   type: 'pie',
   data: {
-    labels: ['Redes Sociais', 'Portais de Notícias', 'TV', 'Outros'],
+    labels: dadosPesquisa.notificacoes.labels,
     datasets: [{
-      data: dadosPorFiltro.todos.pizza,
+      data: dadosPesquisa.notificacoes.valores,
       backgroundColor: ['#42a5f5', '#66bb6a', '#ffa726', '#ab47bc']
     }]
   },
@@ -34,40 +42,26 @@ const graficoPizza = new Chart(ctxPizza, {
   }
 });
 
-// Configuração do Gráfico 2 (Barras)
+// Configuração do Gráfico 2 (Barras - Reação durante a Aula)
 const ctxBarras = document.getElementById('graficoBarras').getContext('2d');
 const graficoBarras = new Chart(ctxBarras, {
   type: 'bar',
   data: {
-    labels: ['Acreditaram e Compartilharam', 'Ficaram na dúvida e Pesquisaram'],
+    labels: dadosPesquisa.reacaoAula.labels,
     datasets: [{
-      label: 'Alunos',
-      data: dadosPorFiltro.todos.barras,
-      backgroundColor: ['#ab47bc', '#42a5f5']
+      label: 'Quantidade de Alunos',
+      data: dadosPesquisa.reacaoAula.valores,
+      backgroundColor: ['#ef5350', '#ffca28', '#26a69a']
     }]
   },
   options: {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
-      y: { beginAtZero: true, max: 30 }
+      y: { beginAtZero: true, max: 20 }
     },
     plugins: {
       legend: { display: false }
     }
   }
 });
-
-// Função para atualizar os gráficos dinamicamente ao mudar o filtro
-function atualizarDashboard() {
-  const valorFiltro = document.getElementById('canalFiltro').value;
-  const novosDados = dadosPorFiltro[valorFiltro];
-
-  // Atualiza Gráfico de Pizza
-  graficoPizza.data.datasets[0].data = novosDados.pizza;
-  graficoPizza.update();
-
-  // Atualiza Gráfico de Barras
-  graficoBarras.data.datasets[0].data = novosDados.barras;
-  graficoBarras.update();
-}
