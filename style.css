@@ -5,58 +5,43 @@
   padding: 0;
 }
 
+/* Fundo da página em azul-bebê bem leve */
 body {
-  background-color: #f0f2f8;
+  background-color: #e8f4f8;
   color: #333;
-  padding: 20px;
+  padding: 30px 20px;
 }
 
 .dashboard-container {
   max-width: 1000px;
   margin: 0 auto;
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
-/* Cabeçalho e Filtro */
+/* Cabeçalho com tom azul mais marcante para destacar */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #5c6bc0;
+  text-align: center;
+  background-color: #4a90e2;
   color: white;
-  padding: 15px 25px;
-  border-radius: 8px;
+  padding: 20px;
+  border-radius: 12px;
   margin-bottom: 25px;
 }
 
 .header h1 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 5px;
 }
 
-.filter-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.filter-container label {
-  font-weight: 500;
+.header .subtitulo {
   font-size: 0.95rem;
+  opacity: 0.9;
 }
 
-select {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: none;
-  font-size: 0.95rem;
-  cursor: pointer;
-  outline: none;
-}
-
-/* Grid dos Gráficos */
+/* Grid dos Gráficos com fundo de cartão azul-muito-claro */
 .charts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -64,9 +49,9 @@ select {
 }
 
 .chart-card {
-  background: #f8f9fe;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background: #f4f9fc;
+  border: 1px solid #d0e3ed;
+  border-radius: 12px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -74,8 +59,8 @@ select {
 }
 
 .chart-card h2 {
-  font-size: 1.1rem;
-  color: #3f51b5;
+  font-size: 1.05rem;
+  color: #2c5282;
   margin-bottom: 15px;
   text-align: center;
 }

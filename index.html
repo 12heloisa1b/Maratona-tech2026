@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Dashboard: Verdade ou Fake?</title>
+  <title>Dashboard: Uso do Telemóvel na Aula</title>
   <!-- Biblioteca Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Link para o ficheiro CSS -->
@@ -12,30 +12,23 @@
 <body>
 
   <div class="dashboard-container">
-    <!-- Cabeçalho com o Filtro Interativo -->
+    <!-- Cabeçalho -->
     <header class="header">
-      <h1>Meu Dashboard: Verdade ou Fake?</h1>
-      <div class="filter-container">
-        <label for="canalFiltro">Canal de Notícias:</label>
-        <select id="canalFiltro" onchange="atualizarDashboard()">
-          <option value="todos">Todos</option>
-          <option value="portais">Apenas Portais de Notícias</option>
-          <option value="redes">Apenas Redes Sociais e Vídeos</option>
-        </select>
-      </div>
+      <h1>Dashboard: Uso do Telemóvel na Aula</h1>
+      <p class="subtitulo">Análise de atenção e distrações dos alunos (27 respostas)</p>
     </header>
 
     <!-- Área Principal com Gráfico 1 e Gráfico 2 -->
     <main class="charts-grid">
       <div class="chart-card">
-        <h2>Gráfico 1: Onde a turma consome notícias?</h2>
+        <h2>Gráfico 1: Notificações que mais tiram a atenção</h2>
         <div class="chart-box">
           <canvas id="graficoPizza"></canvas>
         </div>
       </div>
 
       <div class="chart-card">
-        <h2>Gráfico 2: Reação ao vídeo do canguru</h2>
+        <h2>Gráfico 2: Reação quando o telemóvel toca/vibra</h2>
         <div class="chart-box">
           <canvas id="graficoBarras"></canvas>
         </div>
