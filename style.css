@@ -2,10 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Fundo em tom azul-bebê limpo */
 body {
   background-color: #eaf4f8;
   color: #2c3e50;
@@ -20,7 +19,6 @@ body {
   gap: 20px;
 }
 
-/* Cabeçalho */
 .main-header {
   text-align: center;
   background: #3a7bd5;
@@ -41,7 +39,6 @@ body {
   margin-top: 4px;
 }
 
-/* Cartões de Conteúdo */
 .card {
   background: #ffffff;
   border-radius: 12px;
@@ -58,7 +55,6 @@ body {
   padding-bottom: 6px;
 }
 
-/* Layouts em Grid */
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -79,7 +75,6 @@ body {
   font-size: 0.92rem;
 }
 
-/* Filtro Interativo */
 .filter-bar {
   background: #ffffff;
   padding: 15px 20px;
@@ -103,7 +98,6 @@ select {
   cursor: pointer;
 }
 
-/* Gráficos */
 .charts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));

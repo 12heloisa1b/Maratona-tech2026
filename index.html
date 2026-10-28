@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Interativo - Maratona Tech</title>
-  <!-- Chart.js -->
+  <!-- Importação do Chart.js via CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -12,13 +12,11 @@
 
   <div class="container">
     
-    <!-- Cabeçalho -->
     <header class="main-header">
       <h1>Seu Dashboard Interativo</h1>
       <p class="tagline">Investigação de Dados - Maratona Tech 2026</p>
     </header>
 
-    <!-- Bloco 1: Tema, Pergunta e Hipótese -->
     <section class="card intro-card">
       <h2>Tema, Pergunta e Hipótese</h2>
       <div class="grid-3">
@@ -37,7 +35,6 @@
       </div>
     </section>
 
-    <!-- Barra de Filtro Interativo -->
     <section class="filter-bar">
       <label for="filtroNotificacao"><strong>Filtro Interativo:</strong> Isolamento por Notificação</label>
       <select id="filtroNotificacao" onchange="filtrarDados()">
@@ -47,7 +44,6 @@
       </select>
     </section>
 
-    <!-- Bloco 2: Dois Gráficos Complementares -->
     <section class="charts-grid">
       <div class="card chart-card">
         <h3>Gráfico 1: Notificações de Maior Distração</h3>
@@ -64,16 +60,13 @@
       </div>
     </section>
 
-    <!-- Bloco 3: Análise, Verificação e Conclusão -->
     <section class="grid-2">
-      <!-- Verificação Crítica da IA -->
       <div class="card">
         <h2>Verificação Crítica da IA</h2>
         <p><strong>Análise da IA:</strong> A IA observou que o WhatsApp é o principal vetor de distração e estimou que isso reduz o foco escolar.</p>
         <p><strong>Avaliação Crítica:</strong> Concordamos <em>parcialmente</em>. A IA identificou o imediatismo (51,9% olham de imediato), mas não perguntou diretamente sobre o rendimento escolar. O dado prova o desvio de atenção, mas não o grau de aprendizagem.</p>
       </div>
 
-      <!-- Conclusão e Relação com a Hipótese -->
       <div class="card">
         <h2>Conclusão & Relação com a Hipótese</h2>
         <p><strong>Resultado:</strong> <span class="badge-success">CONFIRMAÇÃO DA HIPÓTESE</span></p>
