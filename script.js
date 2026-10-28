@@ -1,36 +1,28 @@
-// Dados REAIS extraídos da sua pesquisa (27 alunos)
-const dadosPesquisa = {
-  // Gráfico 1: Notificações que mais tiram a atenção
-  notificacoes: {
-    labels: [
-      'Mensagens/Grupos (WhatsApp)', 
-      'Nenhuma (Ignora todas)', 
-      'Jogos/E-mails/Notícias', 
-      'Redes Sociais (TikTok/Insta)'
-    ],
-    valores: [44.4, 37, 11.1, 7.4] // 44,4% (44.4%), 37% (37%), 11,1% (11.1%), 7,4% (7.4%)
+// Base de dados baseada nas 27 respostas reais
+const dadosFiltro = {
+  todas: {
+    pie: [12, 10, 3, 2], // Mensagens, Nenhuma, Jogos, Redes Sociais
+    bar: [14, 7, 6]      // Olham imediatamente, Esperam pausa, Ignoram
   },
-  
-  // Gráfico 2: Reação ao telemóvel tocar na aula
-  reacaoAula: {
-    labels: [
-      'Olham imediatamente', 
-      'Esperam pausa do professor', 
-      'Ignoram até ao final'
-    ],
-    valores: [14, 7, 6] // 14 (51.9%), 7 (25.9%), 6 (22.2%)
+  mensagens: {
+    pie: [12, 0, 0, 0],
+    bar: [10, 2, 0]      // Grupo isolado: a grande maioria olha de imediato
+  },
+  nenhuma: {
+    pie: [0, 10, 0, 0],
+    bar: [1, 3, 6]       // Grupo isolado: a maioria ignora até o fim
   }
 };
 
-// Configuração do Gráfico 1 (Pizza - Tipos de Notificação)
-const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
-const graficoPizza = new Chart(ctxPizza, {
+// Gráfico 1 - Pizza (Notificações)
+const ctxPie = document.getElementById('chartPie').getContext('2d');
+const chartPie = new Chart(ctxPie, {
   type: 'pie',
   data: {
-    labels: dadosPesquisa.notificacoes.labels,
+    labels: ['Mensagens/Grupos', 'Nenhuma (Ignoram)', 'Jogos/Notícias', 'Redes Sociais'],
     datasets: [{
-      data: dadosPesquisa.notificacoes.valores,
-      backgroundColor: ['#42a5f5', '#66bb6a', '#ffa726', '#ab47bc']
+      data: dadosFiltro.todas.pie,
+      backgroundColor: ['#3a7bd5', '#4caf50', '#ff9800', '#9c27b0']
     }]
   },
   options: {
@@ -42,26 +34,39 @@ const graficoPizza = new Chart(ctxPizza, {
   }
 });
 
-// Configuração do Gráfico 2 (Barras - Reação durante a Aula)
-const ctxBarras = document.getElementById('graficoBarras').getContext('2d');
-const graficoBarras = new Chart(ctxBarras, {
+// Gráfico 2 - Barras (Reação)
+const ctxBar = document.getElementById('chartBar').getContext('2d');
+const chartBar = new Chart(ctxBar, {
   type: 'bar',
   data: {
-    labels: dadosPesquisa.reacaoAula.labels,
+    labels: ['Olham Imediatamente', 'Esperam Pausa', 'Ignoram até o Fim'],
     datasets: [{
-      label: 'Quantidade de Alunos',
-      data: dadosPesquisa.reacaoAula.valores,
-      backgroundColor: ['#ef5350', '#ffca28', '#26a69a']
+      label: 'Nº de Estudantes',
+      data: dadosFiltro.todas.bar,
+      backgroundColor: ['#e53935', '#fbc02d', '#009688']
     }]
   },
   options: {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
-      y: { beginAtZero: true, max: 20 }
+      y: { beginAtZero: true, max: 16 }
     },
     plugins: {
       legend: { display: false }
     }
   }
 });
+
+// Função de Interatividade do Filtro
+function filtrarDados() {
+  const chave = document.getElementById('filtroNotificacao').value;
+  const selecao = dadosFiltro[chave];
+
+  // Atualização dinâmica dos 2 gráficos em simultâneo
+  chartPie.data.datasets[0].data = selecao.pie;
+  chartPie.update();
+
+  chartBar.data.datasets[0].data = selecao.bar;
+  chartBar.update();
+}

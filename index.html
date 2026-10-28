@@ -3,40 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard: Uso do Telemóvel na Aula</title>
-  <!-- Biblioteca Chart.js -->
+  <title>Dashboard Interativo - Maratona Tech</title>
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Link para o ficheiro CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="dashboard-container">
+  <div class="container">
+    
     <!-- Cabeçalho -->
-    <header class="header">
-      <h1>Dashboard: Uso do Telemóvel na Aula</h1>
-      <p class="subtitulo">Análise de atenção e distrações dos alunos (27 respostas)</p>
+    <header class="main-header">
+      <h1>Seu Dashboard Interativo</h1>
+      <p class="tagline">Investigação de Dados - Maratona Tech 2026</p>
     </header>
 
-    <!-- Área Principal com Gráfico 1 e Gráfico 2 -->
-    <main class="charts-grid">
-      <div class="chart-card">
-        <h2>Gráfico 1: Notificações que mais tiram a atenção</h2>
-        <div class="chart-box">
-          <canvas id="graficoPizza"></canvas>
+    <!-- Bloco 1: Tema, Pergunta e Hipótese -->
+    <section class="card intro-card">
+      <h2>Tema, Pergunta e Hipótese</h2>
+      <div class="grid-3">
+        <div class="info-box">
+          <strong>Dilema Digital:</strong>
+          <p>Uso de telemóveis e notificações durante as aulas.</p>
+        </div>
+        <div class="info-box">
+          <strong>Pergunta de Pesquisa:</strong>
+          <p>Como as notificações afetam a atenção imediata dos estudantes na aula?</p>
+        </div>
+        <div class="info-box">
+          <strong>Aposta Inicial (Hipótese):</strong>
+          <p>A maioria dos estudantes olha imediatamente para o ecrã assim que chega uma mensagem.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de Filtro Interativo -->
+    <section class="filter-bar">
+      <label for="filtroNotificacao"><strong>Filtro Interativo:</strong> Isolamento por Notificação</label>
+      <select id="filtroNotificacao" onchange="filtrarDados()">
+        <option value="todas">Todas as Notificações (27 alunos)</option>
+        <option value="mensagens">Apenas Mensagens de Grupo / WhatsApp (12 alunos)</option>
+        <option value="nenhuma">Apenas Quem Ignora Notificações (10 alunos)</option>
+      </select>
+    </section>
+
+    <!-- Bloco 2: Dois Gráficos Complementares -->
+    <section class="charts-grid">
+      <div class="card chart-card">
+        <h3>Gráfico 1: Notificações de Maior Distração</h3>
+        <div class="chart-container">
+          <canvas id="chartPie"></canvas>
         </div>
       </div>
 
-      <div class="chart-card">
-        <h2>Gráfico 2: Reação quando o telemóvel toca/vibra</h2>
-        <div class="chart-box">
-          <canvas id="graficoBarras"></canvas>
+      <div class="card chart-card">
+        <h3>Gráfico 2: Reação Imediata na Aula</h3>
+        <div class="chart-container">
+          <canvas id="chartBar"></canvas>
         </div>
       </div>
-    </main>
+    </section>
+
+    <!-- Bloco 3: Análise, Verificação e Conclusão -->
+    <section class="grid-2">
+      <!-- Verificação Crítica da IA -->
+      <div class="card">
+        <h2>Verificação Crítica da IA</h2>
+        <p><strong>Análise da IA:</strong> A IA observou que o WhatsApp é o principal vetor de distração e estimou que isso reduz o foco escolar.</p>
+        <p><strong>Avaliação Crítica:</strong> Concordamos <em>parcialmente</em>. A IA identificou o imediatismo (51,9% olham de imediato), mas não perguntou diretamente sobre o rendimento escolar. O dado prova o desvio de atenção, mas não o grau de aprendizagem.</p>
+      </div>
+
+      <!-- Conclusão e Relação com a Hipótese -->
+      <div class="card">
+        <h2>Conclusão & Relação com a Hipótese</h2>
+        <p><strong>Resultado:</strong> <span class="badge-success">CONFIRMAÇÃO DA HIPÓTESE</span></p>
+        <p>Os dados provam que 51,9% dos alunos olham imediatamente para o telemóvel ao vibrar e 44,4% apontam mensagens de texto/grupos como o maior distrator.</p>
+        <p><strong>Conclusão Final:</strong> A aposta inicial sustentou-se. O imediatismo diante das mensagens é a principal fonte de distração nas aulas.</p>
+      </div>
+    </section>
+
   </div>
 
-  <!-- Link para o ficheiro JS -->
   <script src="script.js"></script>
 </body>
 </html>
