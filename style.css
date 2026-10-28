@@ -1,127 +1,84 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+// Objeto com os dados reais filtrados
+const dadosFiltro = {
+  todas: {
+    pie: [12, 10, 3, 2],
+    bar: [14, 7, 6]
+  },
+  mensagens: {
+    pie: [12, 0, 0, 0],
+    bar: [10, 2, 0]
+  },
+  nenhuma: {
+    pie: [0, 10, 0, 0],
+    bar: [1, 3, 6]
+  }
+};
 
-body {
-  background-color: #eaf4f8;
-  color: #2c3e50;
-  padding: 25px 15px;
-}
+// Variáveis globais para armazenar os gráficos
+let graficoPizza = null;
+let graficoBarras = null;
 
-.container {
-  max-width: 1050px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+// Função executada assim que a página carrega totalmente
+window.onload = function() {
+  const ctxPie = document.getElementById('chartPie');
+  const ctxBar = document.getElementById('chartBar');
 
-.main-header {
-  text-align: center;
-  background: #3a7bd5;
-  color: #ffffff;
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(58, 123, 213, 0.15);
-}
+  if (ctxPie && ctxBar) {
+    // Inicializa o Gráfico 1 (Pizza)
+    graficoPizza = new Chart(ctxPie.getContext('2d'), {
+      type: 'pie',
+      data: {
+        labels: ['Mensagens/Grupos', 'Nenhuma (Ignoram)', 'Jogos/Notícias', 'Redes Sociais'],
+        datasets: [{
+          data: dadosFiltro.todas.pie,
+          backgroundColor: ['#2563eb', '#16a34a', '#d97706', '#9333ea']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
 
-.main-header h1 {
-  font-size: 1.7rem;
-  font-weight: 700;
-}
+    // Inicializa o Gráfico 2 (Barras)
+    graficoBarras = new Chart(ctxBar.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Olham Imediatamente', 'Esperam Pausa', 'Ignoram até o Fim'],
+        datasets: [{
+          label: 'Nº de Estudantes',
+          data: dadosFiltro.todas.bar,
+          backgroundColor: ['#dc2626', '#eab308', '#0d9488']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { beginAtZero: true, max: 16 }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
 
-.main-header .tagline {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  margin-top: 4px;
-}
+    // Conecta o evento de alteração do Filtro Interativo
+    const selectElement = document.getElementById('filtroNotificacao');
+    if (selectElement) {
+      selectElement.onchange = function() {
+        const selecao = dadosFiltro[this.value];
+        if (selecao && graficoPizza && graficoBarras) {
+          graficoPizza.data.datasets[0].data = selecao.pie;
+          graficoPizza.update();
 
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid #d4e6f1;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-.card h2 {
-  font-size: 1.15rem;
-  color: #2b5876;
-  margin-bottom: 12px;
-  border-bottom: 2px solid #eaf4f8;
-  padding-bottom: 6px;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 15px;
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-.info-box {
-  background: #f4f9fc;
-  padding: 12px 15px;
-  border-left: 4px solid #3a7bd5;
-  border-radius: 6px;
-  font-size: 0.92rem;
-}
-
-.filter-bar {
-  background: #ffffff;
-  padding: 15px 20px;
-  border-radius: 10px;
-  border: 1px solid #d4e6f1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-select {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: 1px solid #b0bec5;
-  background-color: #f8fafc;
-  font-size: 0.92rem;
-  color: #333;
-  outline: none;
-  cursor: pointer;
-}
-
-.charts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 20px;
-}
-
-.chart-card h3 {
-  font-size: 1rem;
-  color: #3a7bd5;
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.chart-container {
-  position: relative;
-  height: 250px;
-  width: 100%;
-}
-
-.badge-success {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 0.88rem;
-}
+          graficoBarras.data.datasets[0].data = selecao.bar;
+          graficoBarras.update();
+        }
+      };
+    }
+  }
+};
