@@ -4,150 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Interativo - Maratona Tech</title>
-  
-  <!-- Carregamento Seguro do Chart.js -->
+  <!-- Biblioteca Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    /* Fundo Azul Marcante */
-    body {
-      background-color: #bcd8ec;
-      color: #1e293b;
-      padding: 30px 15px;
-    }
-
-    .container {
-      max-width: 1050px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    /* Cabeçalho Azul Marinho */
-    .main-header {
-      text-align: center;
-      background: #1e3a8a;
-      color: #ffffff;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
-    }
-
-    .main-header h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-    }
-
-    .main-header .tagline {
-      font-size: 1rem;
-      opacity: 0.9;
-      margin-top: 6px;
-    }
-
-    /* Cartões */
-    .card {
-      background: #f1f7fc;
-      border-radius: 14px;
-      padding: 22px;
-      border: 1px solid #93c5fd;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-    }
-
-    .card h2 {
-      font-size: 1.2rem;
-      color: #1e3a8a;
-      margin-bottom: 14px;
-      border-bottom: 2px solid #cbd5e1;
-      padding-bottom: 8px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 22px;
-    }
-
-    .info-box {
-      background: #ffffff;
-      padding: 14px;
-      border-left: 5px solid #2563eb;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    }
-
-    /* Filtro Interativo */
-    .filter-bar {
-      background: #ffffff;
-      padding: 18px 22px;
-      border-radius: 12px;
-      border: 2px solid #3b82f6;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    select {
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: 1px solid #64748b;
-      background-color: #f8fafc;
-      font-size: 0.95rem;
-      color: #0f172a;
-      font-weight: 600;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .charts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 22px;
-    }
-
-    .chart-card h3 {
-      font-size: 1.05rem;
-      color: #1d4ed8;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    /* Contêiner com dimensão explícita para o Chart.js */
-    .chart-wrapper {
-      position: relative;
-      height: 280px;
-      width: 100%;
-    }
-
-    .badge-success {
-      background-color: #dcfce7;
-      color: #15803d;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-
-    .espaco-topo {
-      margin-top: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -191,14 +50,14 @@
     <!-- Bloco 2: Dois Gráficos Complementares -->
     <section class="charts-grid">
       <div class="card chart-card">
-        <h3>Gráfico 1: Notificações de Maior Distração (%)</h3>
+        <h3>Gráfico 1: Notificações de Maior Distração</h3>
         <div class="chart-wrapper">
           <canvas id="chartPie"></canvas>
         </div>
       </div>
 
       <div class="card chart-card">
-        <h3>Gráfico 2: Reação Imediata na Aula (%)</h3>
+        <h3>Gráfico 2: Reação Imediata na Aula</h3>
         <div class="chart-wrapper">
           <canvas id="chartBar"></canvas>
         </div>
@@ -223,53 +82,6 @@
 
   </div>
 
-  <!-- Lógica do Dashboard -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Dados da pesquisa de 27 alunos em Porcentagem (%)
-      const dadosFiltro = {
-        todas: {
-          pie: [44.4, 37.0, 11.1, 7.4],
-          bar: [51.9, 25.9, 22.2]
-        },
-        mensagens: {
-          pie: [100, 0, 0, 0],
-          bar: [83.3, 16.7, 0]
-        },
-        nenhuma: {
-          pie: [0, 100, 0, 0],
-          bar: [10.0, 30.0, 60.0]
-        }
-      };
-
-      const ctxPie = document.getElementById('chartPie');
-      const ctxBar = document.getElementById('chartBar');
-
-      if (!ctxPie || !ctxBar) return;
-
-      // Gráfico 1 - Pizza
-      const graficoPizza = new Chart(ctxPie.getContext('2d'), {
-        type: 'pie',
-        data: {
-          labels: [
-            'Mensagens/Grupos (44,4%)', 
-            'Nenhuma/Ignoram (37,0%)', 
-            'Jogos/Notícias (11,1%)', 
-            'Redes Sociais (7,4%)'
-          ],
-          datasets: [{
-            data: dadosFiltro.todas.pie,
-            backgroundColor: ['#2563eb', '#16a34a', '#d97706', '#9333ea']
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { position: 'bottom' }
-          }
-        }
-      });
-
-      // Gráfico 2 - Barras
-      const graficoBarras = new Chart(ctxBar.getContext('2d'), 
+  <script src="script.js"></script>
+</body>
+</html>
